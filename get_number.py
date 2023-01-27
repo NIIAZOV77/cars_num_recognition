@@ -16,7 +16,10 @@ def car_num_img(img, haar_cascade):
     for x, y, w, h in number_coordinates:
         number_img = img[y + 10: y + h - 5, x + 15: x + w - 15]
 
-    return number_img
+    try:
+        return number_img
+    except:
+        return None
 
 
 # Функция для увеличения изображения номера автомобиля по заданному масштабу
@@ -39,6 +42,8 @@ def get_number(address):
     haar_cascade = cv2.CascadeClassifier('haarcascade_russian_plate_number.xml')
 
     car_num = car_num_img(car_1, haar_cascade)
+    if car_num is None:
+        return None
     car_num = image_enlargement(car_num, 2)
 
     car_num_bw = cv2.cvtColor(car_num, cv2.COLOR_RGB2GRAY)

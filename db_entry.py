@@ -23,3 +23,6 @@ def db_entry(function, data_base):
         if val is None:
             cursor.execute(f'INSERT INTO cars VALUES ("{key}", "{value}")')
             db.commit()
+        else:
+            cursor.execute(f'UPDATE cars SET number = "{value}" WHERE path = "{key}"')
+            db.commit()
